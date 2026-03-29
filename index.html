@@ -1,18 +1,259 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="pt-BR">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>my-first-website</title>
-  <LINK href="styles.css" rel="stylesheet" type="text/css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criador de Personagem RPG</title>
 
+  <!-- Open Graph (WhatsApp preview) -->
+  <meta property="og:title" content="⚔️ Criador de Personagem RPG" />
+  <meta property="og:description" content="Crie seu herói: escolha classe, atributos, aparência e armas. Compartilhe pelo WhatsApp!" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0d0d14" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
 <body>
 
-<img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" id="octocat" alt="octocat-gif" />
+<!-- ===== Header ===== -->
+<header class="app-header">
+  <div class="app-title">⚔️ Forja de Heróis</div>
+  <div class="app-subtitle">Criador de Personagem RPG</div>
+</header>
 
-<!-- Change this code here by copy and pasting your template on line 15 -->
-<p>Welcome to your first GitHub Pages website!</p>
+<!-- ===== App Body ===== -->
+<div class="app-body">
+
+  <!-- ===== Canvas: Visual Character Creator ===== -->
+  <aside class="canvas-panel">
+    <canvas id="char-canvas"></canvas>
+
+    <div class="canvas-controls">
+      <div>
+        <label>Altura <span id="height-val"></span></label>
+        <input type="range" id="slider-height" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+      <div>
+        <label>Porte / Constituição <span id="build-val"></span></label>
+        <input type="range" id="slider-build" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+      <div>
+        <label>Estilo de cabelo <span id="hair-style-label">curto</span></label>
+        <input type="range" id="slider-hair-style" min="0" max="5" step="1" value="0" />
+      </div>
+
+      <hr class="section-divider" />
+
+      <div class="swatches-label">Tom de pele</div>
+      <div class="swatches-row" id="skin-swatches"></div>
+
+      <div class="swatches-label">Cor do cabelo</div>
+      <div class="swatches-row" id="hair-swatches"></div>
+
+      <div class="swatches-label">Cor dos olhos</div>
+      <div class="swatches-row" id="eye-swatches"></div>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <div class="main-content">
+
+    <!-- Tab Nav -->
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="identity" role="tab">Identidade</button>
+      <button class="tab-btn" data-tab="class" role="tab">Classe</button>
+      <button class="tab-btn" data-tab="attributes" role="tab">Atributos</button>
+      <button class="tab-btn" data-tab="weapons" role="tab">Armas</button>
+    </nav>
+
+    <!-- ===== Tab: Identity ===== -->
+    <section id="panel-identity" class="tab-panel active" role="tabpanel">
+      <h2 class="panel-title">Identidade do Personagem</h2>
+      <p class="panel-desc">Dê vida ao seu herói com nome, gênero e pronomes.</p>
+
+      <div class="identity-form">
+        <div class="form-group">
+          <label class="form-label" for="char-name">Nome do Personagem</label>
+          <input class="form-input" type="text" id="char-name" placeholder="Digite o nome do seu herói..." maxlength="40" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Gênero</label>
+          <div class="gender-grid">
+            <button class="gender-btn active" data-gender="male">♂ Masculino</button>
+            <button class="gender-btn" data-gender="female">♀ Feminino</button>
+            <button class="gender-btn" data-gender="non-binary">⚧ Não-binário</button>
+            <button class="gender-btn" data-gender="agender">◈ Agênero</button>
+            <button class="gender-btn" data-gender="other">✦ Outro</button>
+            <button class="gender-btn" data-gender="prefer-not-to-say">— Prefiro não dizer</button>
+          </div>
+        </div>
+
+        <div class="form-group" id="pronouns-group">
+          <label class="form-label" for="char-pronouns">Pronomes (opcional)</label>
+          <input class="form-input" type="text" id="char-pronouns" placeholder="ex: ele/dele, ela/dela, elu/delu..." maxlength="30" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tab: Class ===== -->
+    <section id="panel-class" class="tab-panel" role="tabpanel">
+      <h2 class="panel-title">Escolha sua Classe</h2>
+      <p class="panel-desc">Cada classe define o estilo de combate, habilidades e proficiências do seu personagem.</p>
+
+      <div class="class-grid" id="class-grid">
+        <div style="color: var(--text-muted); font-style: italic; padding: 20px;">Carregando classes...</div>
+      </div>
+
+      <div id="subclass-panel"></div>
+    </section>
+
+    <!-- ===== Tab: Attributes ===== -->
+    <section id="panel-attributes" class="tab-panel" role="tabpanel">
+      <h2 class="panel-title">Atributos</h2>
+      <p class="panel-desc">
+        Distribua seus pontos usando o sistema de compra de pontos. Cada atributo começa em 10.
+        Pontos custam mais quanto maior for o valor (10→11 custa 1pt, 14→15 custa 2pts).
+      </p>
+
+      <div class="points-banner">
+        Pontos restantes: <span id="points-remaining">27</span>
+      </div>
+
+      <div class="attr-container" id="attr-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <h3 class="panel-title" style="font-size:0.9rem; margin-bottom:10px;">Estatísticas Derivadas</h3>
+      <div class="derived-grid">
+        <div class="derived-stat">
+          <label>Pontos de Vida</label>
+          <span id="derived-hp">—</span>
+        </div>
+        <div class="derived-stat">
+          <label>Classe de Armadura</label>
+          <span id="derived-ac">10</span>
+        </div>
+        <div class="derived-stat">
+          <label>Iniciativa</label>
+          <span id="derived-init">+0</span>
+        </div>
+        <div class="derived-stat">
+          <label>Velocidade</label>
+          <span id="derived-speed">9m</span>
+        </div>
+        <div class="derived-stat">
+          <label>Bônus Prof.</label>
+          <span id="derived-prof">+2</span>
+        </div>
+        <div class="derived-stat">
+          <label>Carga Máx.</label>
+          <span id="derived-carry">150 kg</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tab: Weapons ===== -->
+    <section id="panel-weapons" class="tab-panel" role="tabpanel">
+      <h2 class="panel-title">Arsenal</h2>
+      <p class="panel-desc">Equipe armas para o combate. Use o filtro "Compatíveis" para ver apenas as armas da sua classe.</p>
+
+      <!-- Equipment summary -->
+      <div class="equip-summary">
+        <div class="equip-slot">
+          <span class="equip-slot-label">⚔️ Mão Principal</span>
+          <div id="equip-main"><span class="equip-slot-empty">Vazio</span></div>
+        </div>
+        <div class="equip-slot">
+          <span class="equip-slot-label">🛡️ Mão Secundária</span>
+          <div id="equip-off"><span class="equip-slot-empty">Vazio</span></div>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="weapon-filter-bar" id="weapon-filter-bar">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Weapon list -->
+      <div class="weapon-list" id="weapon-list">
+        <div style="color: var(--text-muted); font-style: italic; padding: 20px;">Carregando arsenal...</div>
+      </div>
+    </section>
+
+  </div><!-- /.main-content -->
+</div><!-- /.app-body -->
+
+<!-- ===== Footer: Export ===== -->
+<footer class="app-footer">
+  <button class="btn-primary" id="btn-sheet">📜 Ficha Completa</button>
+  <button class="btn-secondary" id="btn-export-png">🖼️ Exportar PNG</button>
+  <button class="btn-secondary" id="btn-export-json">📄 Exportar JSON</button>
+  <button class="btn-secondary" id="btn-share">🔗 Copiar Link</button>
+</footer>
+
+<!-- ===== Modal: Character Sheet ===== -->
+<div class="modal-overlay" id="sheet-modal">
+  <div id="sheet-content"></div>
+</div>
+
+<!-- ===== Scripts ===== -->
+<script type="module">
+  import { loadData, loadFromHash, initTabs, updateChar, state } from './js/app.js';
+  import { initCanvas, initAppearanceControls, drawCharacter } from './js/characterCreator.js';
+  import { initClassSelector } from './js/classSelector.js';
+  import { initAttributePanel } from './js/attributePanel.js';
+  import { initWeaponPanel } from './js/weaponPanel.js';
+  import { initExport } from './js/exportShare.js';
+
+  // Init all modules
+  initTabs();
+  initCanvas();
+  initAppearanceControls();
+  initClassSelector();
+  initAttributePanel();
+  initWeaponPanel();
+  initExport();
+
+  // Load data (classes + weapons)
+  await loadData();
+
+  // Restore from URL hash if shared link
+  if (loadFromHash()) {
+    // Rebuild UI from restored state
+    document.dispatchEvent(new CustomEvent('data:loaded'));
+    document.dispatchEvent(new CustomEvent('char:updated', { detail: {} }));
+
+    // Restore gender button
+    const genderBtns = document.querySelectorAll('.gender-btn');
+    genderBtns.forEach(b => {
+      b.classList.toggle('active', b.dataset.gender === state.identity.gender);
+    });
+
+    // Restore name
+    const nameInput = document.getElementById('char-name');
+    if (nameInput) nameInput.value = state.identity.name;
+  }
+
+  // ---- Identity: name input ----
+  document.getElementById('char-name')?.addEventListener('input', e => {
+    updateChar('identity.name', e.target.value);
+  });
+
+  // ---- Identity: gender selector ----
+  document.querySelectorAll('.gender-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateChar('identity.gender', btn.dataset.gender);
+    });
+  });
+
+  // ---- Identity: pronouns ----
+  document.getElementById('char-pronouns')?.addEventListener('input', e => {
+    updateChar('identity.pronouns', e.target.value);
+  });
+</script>
 
 </body>
 </html>

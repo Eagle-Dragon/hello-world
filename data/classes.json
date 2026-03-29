@@ -1,0 +1,436 @@
+{
+  "classes": [
+    {
+      "id": "warrior",
+      "name": "Guerreiro",
+      "nameEn": "Warrior",
+      "description": "Mestres do combate marcial, endurecidos por anos de experiência em batalha. Dominam qualquer arma e armadura.",
+      "flavor": "Aço e vontade — seu corpo é sua arma.",
+      "hitDie": 10,
+      "primaryAttributes": ["STR", "CON"],
+      "savingThrows": ["STR", "CON"],
+      "proficiencies": {
+        "armor": ["leve", "médio", "pesado", "escudo"],
+        "weapons": ["simples", "marciais"],
+        "tools": []
+      },
+      "startingAttributeBonus": { "STR": 2, "CON": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.65,
+        "accentColor": "#c0392b",
+        "bodyProfile": "muscular"
+      },
+      "compatibleWeaponCategories": ["sword", "axe", "mace", "polearm", "shield"],
+      "subclasses": [
+        {
+          "id": "berserker",
+          "name": "Berserker",
+          "description": "Canaliza raiva primitiva, trocando defesa por ataque avassalador.",
+          "features": [
+            { "level": 3, "name": "Fúria", "description": "+2 de dano, resistência a dano físico, não pode ser assustado enquanto está em fúria." },
+            { "level": 7, "name": "Frenesi Implacável", "description": "Pode entrar em fúria como ação bônus a qualquer momento." },
+            { "level": 10, "name": "Mente Intimidante", "description": "Adiciona bônus de CON nas jogadas de Intimidação." }
+          ]
+        },
+        {
+          "id": "battlemaster",
+          "name": "Mestre de Batalha",
+          "description": "Emprega manobras táticas e dados de superioridade de combate.",
+          "features": [
+            { "level": 3, "name": "Manobras de Combate", "description": "Aprende 3 manobras. Ganha 4 dados de superioridade (d8)." },
+            { "level": 7, "name": "Conhecimento Marcial", "description": "Aprende 2 manobras adicionais. Dados superiores tornam-se d10." },
+            { "level": 10, "name": "Tática Impecável", "description": "Recupera todos os dados de superioridade com descanso curto." }
+          ]
+        },
+        {
+          "id": "champion",
+          "name": "Campeão",
+          "description": "Habilidade atlética refinada e alcance de acerto crítico expandido.",
+          "features": [
+            { "level": 3, "name": "Crítico Aprimorado", "description": "Acertos críticos em 19-20 em vez de apenas 20." },
+            { "level": 7, "name": "Atleta Extraordinário", "description": "Adiciona metade do bônus de proficiência em testes físicos não proficientes." },
+            { "level": 10, "name": "Estilo de Combate Adicional", "description": "Aprende mais um estilo de combate." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rogue",
+      "name": "Ladino",
+      "nameEn": "Rogue",
+      "description": "Especialistas em furtividade e golpes precisos. Exploram fraquezas e escapam antes de serem notados.",
+      "flavor": "Nas sombras vive quem sabe sobreviver.",
+      "hitDie": 8,
+      "primaryAttributes": ["DEX", "INT"],
+      "savingThrows": ["DEX", "INT"],
+      "proficiencies": {
+        "armor": ["leve"],
+        "weapons": ["simples", "espada curta", "espada longa", "arco longo"],
+        "tools": ["ferramentas de ladrão"]
+      },
+      "startingAttributeBonus": { "DEX": 2, "INT": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.3,
+        "accentColor": "#1abc9c",
+        "bodyProfile": "ágil"
+      },
+      "compatibleWeaponCategories": ["dagger", "sword", "bow"],
+      "subclasses": [
+        {
+          "id": "assassin",
+          "name": "Assassino",
+          "description": "Especialista em eliminar alvos antes que percebam o perigo.",
+          "features": [
+            { "level": 3, "name": "Assassinar", "description": "Vantagem em ataques contra criaturas que ainda não agiram. Crítico automático em surpresa." },
+            { "level": 9, "name": "Identidade Falsa", "description": "Criou identidades falsas permanentes. Habilidade em disfarces e falsificações." },
+            { "level": 13, "name": "Impostor", "description": "Pode imitar perfeitamente a aparência e voz de uma pessoa após 3 horas de estudo." }
+          ]
+        },
+        {
+          "id": "arcane-trickster",
+          "name": "Trapaceiro Arcano",
+          "description": "Usa magia de ilusão e encantamento para potencializar golpes.",
+          "features": [
+            { "level": 3, "name": "Conjurador", "description": "Aprende truques e magias da lista de Mago (foco em ilusão/encantamento)." },
+            { "level": 7, "name": "Mão Mágica Ambiciosa", "description": "A Mão Mágica pode realizar ações de ladino, ficando invisível." },
+            { "level": 10, "name": "Ilusão Mágica", "description": "Pode tornar-se invisível como ação bônus por 1 minuto." }
+          ]
+        },
+        {
+          "id": "swashbuckler",
+          "name": "Espadachim",
+          "description": "Combatente elegante que dança em batalha com charme e precisão.",
+          "features": [
+            { "level": 3, "name": "Ataque Desenvolto", "description": "Dano furtivo mesmo sem aliados adjacentes ao alvo." },
+            { "level": 9, "name": "Aparência Elegante", "description": "Adiciona CHA a iniciativa e imunidade a ataques de oportunidade após atacar." },
+            { "level": 13, "name": "Dança Marcial", "description": "Pode mover-se metade do movimento entre cada ataque." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mage",
+      "name": "Mago",
+      "nameEn": "Mage",
+      "description": "Estudiosos das artes arcanas que manipulam as forças da magia para destruir, criar e transformar.",
+      "flavor": "O conhecimento é poder — e o poder está em minhas mãos.",
+      "hitDie": 6,
+      "primaryAttributes": ["INT", "WIS"],
+      "savingThrows": ["INT", "WIS"],
+      "proficiencies": {
+        "armor": [],
+        "weapons": ["adagas", "dardos", "fundas", "cajados", "besta leve"],
+        "tools": []
+      },
+      "startingAttributeBonus": { "INT": 2, "WIS": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.25,
+        "accentColor": "#9b59b6",
+        "bodyProfile": "esguio"
+      },
+      "compatibleWeaponCategories": ["staff", "dagger"],
+      "subclasses": [
+        {
+          "id": "evocation",
+          "name": "Evocador",
+          "description": "Especialista em magias de destruição elementar e explosões devastadoras.",
+          "features": [
+            { "level": 2, "name": "Esculpir Magias", "description": "Pode excluir aliados do área de efeito de suas magias de evocação." },
+            { "level": 6, "name": "Potência Enérgica", "description": "Magias de dano causam dano mínimo de 1+modificador de INT." },
+            { "level": 10, "name": "Sobrecarregar Evocação", "description": "Uma vez por descanso longo, pode maximizar dados de dano de uma magia." }
+          ]
+        },
+        {
+          "id": "illusion",
+          "name": "Ilusionista",
+          "description": "Mestre em criar realidades falsas que enganam sentidos e mentes.",
+          "features": [
+            { "level": 2, "name": "Ilusão Melhorada", "description": "Pode criar ilusões menores com ação bônus. Ilusões têm detalhes extras." },
+            { "level": 6, "name": "Ilusão Maleável", "description": "Pode alterar ilusões ativas como ação bônus." },
+            { "level": 10, "name": "Ilusão Vívida", "description": "Ilusões podem causar dano psíquico real em criaturas que acreditam nelas." }
+          ]
+        },
+        {
+          "id": "necromancy",
+          "name": "Necromante",
+          "description": "Manipula energia da morte e comanda os mortos-vivos.",
+          "features": [
+            { "level": 2, "name": "Colheita Sombria", "description": "Quando mata criaturas com magia, ganha PV temporários." },
+            { "level": 6, "name": "Morto-Vivo Aprimorado", "description": "Mortos-vivos sob seu controle ganham bônus de PV e dano." },
+            { "level": 10, "name": "Comando dos Mortos", "description": "Mortos-vivos inteligentes precisam de bônus para resistir seus comandos." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cleric",
+      "name": "Clérigo",
+      "nameEn": "Cleric",
+      "description": "Servos divinos que canalizam o poder de seus deuses para curar aliados, destruir inimigos e abençoar o campo de batalha.",
+      "flavor": "A fé é minha armadura e minha espada.",
+      "hitDie": 8,
+      "primaryAttributes": ["WIS", "CHA"],
+      "savingThrows": ["WIS", "CHA"],
+      "proficiencies": {
+        "armor": ["leve", "médio", "escudo"],
+        "weapons": ["simples"],
+        "tools": []
+      },
+      "startingAttributeBonus": { "WIS": 2, "CHA": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.5,
+        "accentColor": "#f39c12",
+        "bodyProfile": "médio"
+      },
+      "compatibleWeaponCategories": ["mace", "staff", "shield"],
+      "subclasses": [
+        {
+          "id": "life",
+          "name": "Domínio da Vida",
+          "description": "Clérigo da cura e preservação, mestre em restaurar vitalidade.",
+          "features": [
+            { "level": 1, "name": "Cura Poderosa", "description": "Magias de cura restauram PV adicionais igual a 2 + nível da magia." },
+            { "level": 2, "name": "Canal Divino: Preservar Vida", "description": "Restaura PV igual a 5x nível de clérigo dividido entre criaturas próximas." },
+            { "level": 6, "name": "Curador Abençoado", "description": "Quando cura outros, também recupera 1d6+nível PV." }
+          ]
+        },
+        {
+          "id": "war",
+          "name": "Domínio da Guerra",
+          "description": "Guerreiro sagrado que lidera tropas e inspira vitória.",
+          "features": [
+            { "level": 1, "name": "Devoto de Guerra", "description": "Proficiência em armaduras pesadas e armas marciais." },
+            { "level": 2, "name": "Canal Divino: Golpe Guiado", "description": "Adiciona +10 a uma jogada de ataque para não errar." },
+            { "level": 6, "name": "Bênção de Guerra", "description": "Quando aliado ao alcance ataca, pode usar reação para conceder vantagem." }
+          ]
+        },
+        {
+          "id": "trickery",
+          "name": "Domínio da Trapaça",
+          "description": "Servo de deuses da astúcia, engano e liberdade.",
+          "features": [
+            { "level": 1, "name": "Bênção do Trapaceiro", "description": "Pode tocar aliado para dar vantagem em furtividade por 1 hora." },
+            { "level": 2, "name": "Canal Divino: Cópia Divina", "description": "Cria cópia ilusória de si mesmo para confundir inimigos." },
+            { "level": 6, "name": "Escudo da Trapaça", "description": "Pode usar Canal para se tornar invisível como reação ao levar dano." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ranger",
+      "name": "Patrulheiro",
+      "nameEn": "Ranger",
+      "description": "Guardiões dos ermos que rastreiam presas, dominam a natureza e eliminam alvos à distância.",
+      "flavor": "A floresta fala para quem sabe escutar.",
+      "hitDie": 10,
+      "primaryAttributes": ["DEX", "WIS"],
+      "savingThrows": ["STR", "DEX"],
+      "proficiencies": {
+        "armor": ["leve", "médio", "escudo"],
+        "weapons": ["simples", "marciais"],
+        "tools": []
+      },
+      "startingAttributeBonus": { "DEX": 2, "WIS": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.35,
+        "accentColor": "#27ae60",
+        "bodyProfile": "atlético"
+      },
+      "compatibleWeaponCategories": ["bow", "dagger", "sword"],
+      "subclasses": [
+        {
+          "id": "hunter",
+          "name": "Caçador",
+          "description": "Especialista em abater alvos específicos com eficiência letal.",
+          "features": [
+            { "level": 3, "name": "Presa do Caçador", "description": "Escolhe entre Matador de Colossus, Golpe do Assassino ou Matador de Horda." },
+            { "level": 7, "name": "Táticas Defensivas", "description": "Escolhe entre Escudo de Bando, Esquiva Instintiva ou Fuga do Selvagem." },
+            { "level": 11, "name": "Multiataque", "description": "Escolhe entre Ataque em Voador, Rajada ou Ataque em Chicotada." }
+          ]
+        },
+        {
+          "id": "beast-master",
+          "name": "Mestre das Feras",
+          "description": "Forma um vínculo com uma criatura animal como companheiro de combate.",
+          "features": [
+            { "level": 3, "name": "Companheiro do Ranger", "description": "Vincula uma besta como companheiro leal. Ela age na sua iniciativa." },
+            { "level": 7, "name": "Treinamento Excepcional", "description": "Companheiro pode usar ação bônus para Atacar, Derrubar ou Empurrar." },
+            { "level": 11, "name": "Fúria da Besta", "description": "Companheiro pode atacar duas vezes e adiciona seu bônus de proficiência ao dano." }
+          ]
+        },
+        {
+          "id": "gloom-stalker",
+          "name": "Caçador das Trevas",
+          "description": "Combatente das sombras que opera onde a luz não alcança.",
+          "features": [
+            { "level": 3, "name": "Visão das Trevas Aprimorada", "description": "Invisível para criaturas com visão no escuro. +10 de bônus de iniciativa." },
+            { "level": 7, "name": "Mente de Ferro", "description": "Vantagem em testes de resistência à magia de encantamento e assombramento." },
+            { "level": 11, "name": "Presença Espectral", "description": "Pode tornar-se invisível como ação bônus após atacar." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paladin",
+      "name": "Paladino",
+      "nameEn": "Paladin",
+      "description": "Guerreiros sagrados que combinam combate marcial com poder divino. Guardiões da justiça e da fé.",
+      "flavor": "Minha espada é a lei do divino.",
+      "hitDie": 10,
+      "primaryAttributes": ["STR", "CHA"],
+      "savingThrows": ["WIS", "CHA"],
+      "proficiencies": {
+        "armor": ["leve", "médio", "pesado", "escudo"],
+        "weapons": ["simples", "marciais"],
+        "tools": []
+      },
+      "startingAttributeBonus": { "STR": 1, "CHA": 2 },
+      "visualHints": {
+        "recommendedBuild": 0.6,
+        "accentColor": "#3498db",
+        "bodyProfile": "imponente"
+      },
+      "compatibleWeaponCategories": ["sword", "mace", "polearm", "shield"],
+      "subclasses": [
+        {
+          "id": "devotion",
+          "name": "Juramento de Devoção",
+          "description": "Paladino clássico da luz e da honra, símbolo de retidão.",
+          "features": [
+            { "level": 3, "name": "Arma Sagrada", "description": "Adiciona modificador de CHA à jogada de ataque de uma arma por 1 minuto." },
+            { "level": 7, "name": "Aura de Devoção", "description": "Você e aliados a 3m são imunes a ser encantados." },
+            { "level": 15, "name": "Pureza de Espírito", "description": "Sempre sob efeito de Proteção contra o Mal e o Bem." }
+          ]
+        },
+        {
+          "id": "vengeance",
+          "name": "Juramento de Vingança",
+          "description": "Caçador implacável que pune os malignos sem misericórdia.",
+          "features": [
+            { "level": 3, "name": "Inimizade Implacável", "description": "Canal: vantagem em ataques contra o alvo por 1 minuto." },
+            { "level": 7, "name": "Aura de Ódio", "description": "+CHA de dano extra contra criaturas malignas e mortos-vivos." },
+            { "level": 15, "name": "Alma de Vingança", "description": "Quando o alvo da Inimizade ataca, pode usar reação para atacá-lo." }
+          ]
+        },
+        {
+          "id": "ancients",
+          "name": "Juramento dos Primordiais",
+          "description": "Protetor da vida, da natureza e da luz primordial.",
+          "features": [
+            { "level": 3, "name": "Luz Peregrina", "description": "Canal: toca criaturas para causar dano radiante e ficam encantadas." },
+            { "level": 7, "name": "Aura de Vigília", "description": "Você e aliados a 3m têm resistência a dano de magias." },
+            { "level": 15, "name": "Proteção Primordial", "description": "Criaturas encantadas, assombradas e com medo não podem afetar você." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "druid",
+      "name": "Druida",
+      "nameEn": "Druid",
+      "description": "Guardiões da natureza que canalizam forças elementais e se transformam em animais para proteger o mundo natural.",
+      "flavor": "Sou um com a terra, o vento e a tempestade.",
+      "hitDie": 8,
+      "primaryAttributes": ["WIS", "CON"],
+      "savingThrows": ["INT", "WIS"],
+      "proficiencies": {
+        "armor": ["leve", "médio (sem metal)"],
+        "weapons": ["clavas", "adagas", "dardos", "lanças", "cajados", "cimitarras", "foices", "fundas"],
+        "tools": ["kit de herborista"]
+      },
+      "startingAttributeBonus": { "WIS": 2, "CON": 1 },
+      "visualHints": {
+        "recommendedBuild": 0.45,
+        "accentColor": "#8e6b23",
+        "bodyProfile": "natural"
+      },
+      "compatibleWeaponCategories": ["staff", "dagger", "polearm"],
+      "subclasses": [
+        {
+          "id": "moon",
+          "name": "Círculo da Lua",
+          "description": "Mestre das transformações, capaz de assumir formas de criaturas poderosas.",
+          "features": [
+            { "level": 2, "name": "Forma Selvagem de Combate", "description": "Pode transformar-se em bestas de FP 1 (sobe com o nível). Mantém HP ao transformar." },
+            { "level": 6, "name": "Ataque de Fada", "description": "Ataques enquanto transformado contam como mágicos para resistências." },
+            { "level": 10, "name": "Transformação Elementar", "description": "Pode transformar-se em elementais (terra, água, fogo, ar)." }
+          ]
+        },
+        {
+          "id": "land",
+          "name": "Círculo da Terra",
+          "description": "Conectado a um bioma específico, canaliza suas energias únicas.",
+          "features": [
+            { "level": 2, "name": "Ataque Natural", "description": "Pode recuperar slots de magia durante descanso curto." },
+            { "level": 6, "name": "Mágicas de Terreno", "description": "Obtém magias extras baseadas no bioma escolhido." },
+            { "level": 10, "name": "Passo da Terra", "description": "Terreno difícil não te afeta. Pode se teletransportar para terrenos naturais." }
+          ]
+        },
+        {
+          "id": "spores",
+          "name": "Círculo dos Esporos",
+          "description": "Abraça a decomposição e os fungos como parte natural do ciclo.",
+          "features": [
+            { "level": 2, "name": "Halo de Esporos", "description": "Pode usar reação para causar dano necrótico a criaturas próximas." },
+            { "level": 6, "name": "Fortaleza Fúngica", "description": "Pode animar corpos recém-mortos como zumbis fúngicos." },
+            { "level": 10, "name": "Reanimação Esporante", "description": "Quando reduzido a 0 PV, esporos te animam com 1 PV." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shadowblade",
+      "name": "Lâmina das Sombras",
+      "nameEn": "Shadowblade",
+      "description": "Assassinos místicos que fundem magia das trevas com combate furtivo. Existem entre o mundo dos vivos e o vazio.",
+      "flavor": "Nasci da escuridão. A escuridão é meu lar.",
+      "hitDie": 8,
+      "primaryAttributes": ["DEX", "CHA"],
+      "savingThrows": ["DEX", "CHA"],
+      "proficiencies": {
+        "armor": ["leve"],
+        "weapons": ["simples", "espadas curtas", "espadas longas", "rapieiras"],
+        "tools": ["ferramentas de ladrão"]
+      },
+      "startingAttributeBonus": { "DEX": 1, "CHA": 2 },
+      "visualHints": {
+        "recommendedBuild": 0.3,
+        "accentColor": "#6a2a8a",
+        "bodyProfile": "sombrio"
+      },
+      "compatibleWeaponCategories": ["dagger", "sword"],
+      "subclasses": [
+        {
+          "id": "void-walker",
+          "name": "Andarilho do Vazio",
+          "description": "Viaja através do espaço vazio entre planos, tornando-se intangível.",
+          "features": [
+            { "level": 3, "name": "Passo das Sombras", "description": "Pode se teletransportar para espaços de sombra como ação bônus." },
+            { "level": 7, "name": "Forma de Névoa", "description": "Uma vez por descanso longo, torna-se intangível por 1 minuto." },
+            { "level": 10, "name": "Consumo do Vazio", "description": "Ao matar, pode absorver a sombra do inimigo para ganhar PV." }
+          ]
+        },
+        {
+          "id": "blood-dancer",
+          "name": "Dançarino de Sangue",
+          "description": "Usa o sangue derramado como combustível para magias devastadoras.",
+          "features": [
+            { "level": 3, "name": "Pacto de Sangue", "description": "Pode gastar PV para potencializar magias ou ataques. Dano aumenta com sangue sacrificado." },
+            { "level": 7, "name": "Frênesi Sanguíneo", "description": "Quando causa dano, recupera PV iguais ao modificador de CHA." },
+            { "level": 10, "name": "Explosão Carmesim", "description": "Uma vez por turno, pode explodir o sangue de um inimigo ferido." }
+          ]
+        },
+        {
+          "id": "phantom",
+          "name": "Fantasma",
+          "description": "Existe parcialmente no plano espectral, sendo difícil de acertar e detectar.",
+          "features": [
+            { "level": 3, "name": "Presença Etérea", "description": "Metade da chance de ser afetado por ataques de criaturas não mágicas." },
+            { "level": 7, "name": "Aparição", "description": "Pode se tornar completamente invisível por 10 minutos por descanso curto." },
+            { "level": 10, "name": "Gritar do Além", "description": "Ataques causam dano psíquico adicional igual ao modificador de CHA." }
+          ]
+        }
+      ]
+    }
+  ]
+}
